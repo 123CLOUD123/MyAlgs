@@ -1,5 +1,7 @@
 package MyDataStructure;
 
+import com.cloud.MySort.SortUtil;
+
 /**
  * 二叉查找树
  * 
@@ -164,6 +166,54 @@ public class BST<K extends Comparable<K>, T> {
 		}
 		return node.n;
 	}
+	
+	//打印所有元素（先序遍历）
+	public void printAll() {
+		print(root);
+		System.out.println();
+	}
+	
+	private void print(Node node) {
+		if (node == null) {
+			return;
+		}
+		print(node.left);
+		System.out.print("[" + node.k + ":" + node.t + "],");
+		print(node.right);
+	}
+	
+	//打印所有元素（中序遍历）
+	public void printAll1() {
+		print1(root);
+		System.out.println();
+	}
+	private void print1(Node node) {
+		if (node == null) {
+			return;
+		}
+		System.out.print("[" + node.k + ":" + node.t + "],");
+		print(node.left);
+		print(node.right);
+	}
+	
+	//计算树的高度
+	public int height() {
+		return height(root);
+	}
+	
+	private int height(Node node) {
+		if (node == null) {
+			return 0;
+		}
+		int leftH = height(node.left) + 1;
+		int rightH = height(node.right) + 1;
+		if (leftH > rightH) {
+			return leftH;
+		} else {
+			return rightH;
+		}
+		
+	}
 
 	public static void main(String[] args) {
 		BST<Integer, String> a = new BST<Integer, String>();
@@ -178,18 +228,19 @@ public class BST<K extends Comparable<K>, T> {
 		a.put(500, "字符5050");
 		s = a.get(500);
 		System.out.println(s);
+		a.printAll();
 		
 		//测试大小
 		System.out.println("大小：" + a.size());
 
-		// 测试最大键
+		// 测试删除最大键
 		Integer max = a.max();
 		System.out.println("最大键1：" + max);
 		a.deleteMax();
 		Integer max2 = a.max();
 		System.out.println("最大键2：" + max2);
 
-		// 测试最小键
+		// 测试删除最小键
 		Integer min = a.min();
 		System.out.println("最小键1：" + min);
 		a.deleteMin();
@@ -205,5 +256,30 @@ public class BST<K extends Comparable<K>, T> {
 		s =  a.get(500);
 		System.out.println(s);
 
+		//测试打印
+		a.printAll();
+		
+		//测试性能
+		for (int i = 0; i < 1000000; i++) {
+			int k = (int) (Math.random() * 1000000);
+			a.put(k, "值" + k);
+		}
+		a.put(50000, "<<命中>>");
+		SortUtil.start();
+		String ss = a.get(50000);
+		double tt = SortUtil.end();
+		System.out.println("大小" + a.size() + "--" + ss + "--用时：" + tt);
+		
+		//测试计算树的高度
+		System.out.println("-----------");
+		BST<Integer, String> b = new BST<Integer, String>();
+		b.put(0, "555");
+		for (int i = 0; i < 10; i++) {
+			int j = (int) (Math.random() * 10);
+			b.put(j, j + "");
+			System.out.print(j + "+++");
+		}
+		System.out.println();
+		System.out.println("树的高度：" + b.height() + "--" + b.root.k);
 	}
 }

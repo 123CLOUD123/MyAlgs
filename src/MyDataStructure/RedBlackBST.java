@@ -141,5 +141,22 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
 		
 	}
 	
+	public boolean isBlackNode(Node node) {
+		if (node.left != null) {
+			if (!node.isRed && !node.left.isRed) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			if (!node.isRed) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+	}
+	
+	
 	
 }
