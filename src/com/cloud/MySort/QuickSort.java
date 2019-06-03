@@ -54,11 +54,11 @@ public class QuickSort {
 	}
 
 	public static void main(String[] args) {
-		Integer[] a = SortUtil.getIntegerArray(10_000_000);
+		Integer[] a = SortUtil.getIntegerArray(800_000);
 		System.out.println("是否已排序：" + SortUtil.isSorted(a)); 
 		SortUtil.start();
 		sort(a);
 		double time = SortUtil.end();
-		System.out.print("是否已排序：" + SortUtil.isSorted(a) + "， 运行时间：" + time + "秒"); //1千万- 3.2s 
+		System.out.println("是否已排序：" + SortUtil.isSorted(a) + "， 运行时间：" + time + "秒"); //1千万- 3.2s 
 	}
 }

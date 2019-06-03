@@ -45,6 +45,21 @@ public class SortUtil {
 	}
 	
 	/**
+	 * 随机生成大小为参数len大小的Integer数组,包含許多重複元素
+	 */
+	public static Integer[] getRepeatIntegerArray(int len) {
+		Integer[] a = new Integer[len + len / 2];
+		for (int i = 0; i < len; i++) {
+			int num = (int) (Math.random() * len);
+			a[i] = num;
+		}
+		for (int i = 0; i < len / 2; i++) {
+			a[len + i] = len / 2;
+		}
+		return a;
+	}
+	
+	/**
 	 * 随机生成只有n种值的长度为len数组
 	 */
 	public static Integer[] getIntegerArrayLimited(int n, int len) {
