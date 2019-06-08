@@ -1,11 +1,13 @@
 package MyDataStructure;
 
+import java.util.Iterator;
+
 /**
  * 双向链表
  * @author Cloud
  *
  */
-public final class MyLinkedList<T> {
+public final class MyLinkedList<Item> implements Iterable<Item>{
 
 	private Node first;
 	
@@ -25,11 +27,11 @@ public final class MyLinkedList<T> {
 	}
 	
 	//添加元素到最后
-	public void add(T t) {
+	public void add(Item t) {
 		if (first == null) {
-			last = first = new Node<T>(t, null, null);
+			last = first = new Node<Item>(t, null, null);
 		} else {
-			Node newNode = new Node<T>(t, null, last);
+			Node newNode = new Node<Item>(t, null, last);
 			last.next = newNode;
 			last = newNode;
 			
@@ -39,7 +41,7 @@ public final class MyLinkedList<T> {
 	
 	
 	//获取第i个节点的值
-	public T get(int i) {
+	public Item get(int i) {
 		if (first == null) {
 			System.out.println("空表");
 			return null;
@@ -56,11 +58,11 @@ public final class MyLinkedList<T> {
 		for (int j = 0; j < i; j++) {
 			result = result.next;
 		}
-		return (T) result.k;
+		return (Item) result.k;
 	}
 	
 	//删除第i个元素
-	public T delete(int i) {
+	public Item delete(int i) {
 		if (first == null) {
 			System.out.println("空表");
 			return null;
@@ -92,13 +94,34 @@ public final class MyLinkedList<T> {
 			nextNode.last = lastNode;
 		}
 		this.length--;
-		return (T) result.k;
+		return (Item) result.k;
 		
 	}
 	
 	//获取链表长度
 	public int length() {
 		return this.length;
+	}
+	
+	@Override
+	public Iterator<Item> iterator() {
+		return new Iterator<Item>() {
+
+			private Node node = first;
+			
+			@Override
+			public boolean hasNext() {
+				return node != null;
+			}
+
+			@Override
+			public Item next() {
+				Item t = (Item) node.k;
+				node = node.next;
+				return t;
+			}
+			
+		};
 	}
 	
 	public static void main(String[] args) {
@@ -112,5 +135,10 @@ public final class MyLinkedList<T> {
 		System.out.println(a.last.k);
 		System.out.println(a.first.k);
 		System.out.println(a.length());
+		for (String s : a) {
+			System.out.println(s);
+		}
 	}
+
+
 }
