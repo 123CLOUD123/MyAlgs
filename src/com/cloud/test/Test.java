@@ -3,7 +3,7 @@ package com.cloud.test;
 import java.util.Arrays;
 
 public class Test{
-	
+	private long q;
 	private int k;
 	
 	private int master;
